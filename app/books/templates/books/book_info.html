@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- COVER -->
+        <div class="col-md-3 text-center">
+          <img src="{{ url_for('static', filename=book.cover) }}"
+               class="img-fluid rounded shadow-sm"
+               alt="{{ book.title }}">
+        </div>
+
+    <!-- BOOK INFO -->
+        <div class="col-md-6">
+            <h3 class="mb-2">{{ book.title }}</h3>
+
+            <p class="mb-1 text-muted">
+                <strong>Author:</strong> {{ book.author }}
+            </p>
+
+            {% if book.year %}
+            <p class="mb-1 text-muted">
+                <strong>Year:</strong> {{ book.year }}
+            </p>
+            {% endif %}
+
+            {% if book.rating %}
+            <p class="mb-1 text-muted">
+                <strong> Rating:</strong> ⭐ {{ book.rating }}
+            </p>
+            {% endif %}
+
+          <hr>
+
+          <p>{{ book.description }}</p>
+        </div>
+
+        <!-- BUY card -->
+        <div class="col-md-3">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h4 class="mb-3">${{ '%.2f'|format(book.price) }}</h4>
+
+                <form method="POST" action="{{ url_for('order_bp.add_to_cart', book_id=book.id) }}">
+                    {% if qty_in_cart > 0 %}
+                        <p class="text-muted">
+                            In cart: {{ qty_in_cart }}
+                        </p>
+                        {% if available %}
+                            <button type="submit" class="btn btn-primary w-100 mb-0">
+                                <i class="bi bi-cart-plus me-1"></i>
+                                Add one more
+                            </button>
+                        {% endif %}
+                    {% else %}
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-cart-plus me-1"></i>
+                            Add to cart
+                        </button>
+                    {% endif %}
+                </form>
+
+                {% if in_cart %}
+                <form method="POST"
+                      action="{{ url_for('order_bp.remove_book_from_cart', book_id=book.id) }}"
+                      class="mt-1">
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="bi bi-trash me-1"></i>
+                        Remove from cart
+                    </button>
+                </form>
+                {% endif %}
+
+                {% if not available %}
+                    <p class="text-danger">Currently out of stock</p>
+                {% endif %}
+                
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('books_bp.share_review', book_id=book.id) }}" class="btn btn-outline-secondary text-bold mt-3">
+                        Leave review
+                    </a>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h4>Reviews</h4>
+        {% if reviews %}
+            {% for review in reviews %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-1">{{ review.username }}</h6>
+                        <small class="text-muted">{{ review.created_at.strftime('%d %b %Y') }}</small>
+                    </div>
+                    <p class="mb-1">Rating:
+                        {% for i in range(review.score|round|int) %}
+                            ⭐
+                        {% endfor %}
+                    </p>
+                    <p class="mb-0">{{ review.review }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No reviews yet. Be the first to leave a review!</p>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}
+

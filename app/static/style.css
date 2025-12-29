@@ -1,0 +1,20 @@
+.category-card:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+}
+
+.payment-option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    max-width: 220px; /* ограничение ширины */
+}
+
+.payment-option input[type="radio"],
+.payment-option input[type="checkbox"] {
+    margin: 0;
+}

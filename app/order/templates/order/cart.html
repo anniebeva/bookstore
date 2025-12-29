@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col">
+      <h2>Your Cart</h2>
+      <p class="text-muted">Select the books you want to order</p>
+    </div>
+  </div>
+
+  <div class="row">
+  <!-- CART items -->
+  <div class="col-md-8">
+
+      {% for item in cart_items %}
+        <div class="card mb-3 shadow-sm">
+          <div class="row g-2 align-items-center p-2">
+            <!-- Cover -->
+            <div class="col-2 mt-3 mb-3">
+              <img src="{{ url_for('static', filename=item.cover) }}" class="img-fluid rounded">
+            </div>
+
+            <!-- Title + Author -->
+            <div class="col-3">
+              <h5 class="mb-1">{{ item.title }}</h5>
+              <p class="text-muted mb-0">{{ item.author }}</p>
+            </div>
+
+            <!-- Quantity controls -->
+            <div class="col-2 text-center">
+              <form method="POST" action="{{ url_for('order_bp.remove_copy_from_cart', book_id=item.id) }}" class="d-inline">
+                <button class="btn btn-sm btn-outline-secondary">-</button>
+              </form>
+              <span class="mx-2">{{ item.quantity }}</span>
+
+              <form method="POST" action="{{ url_for('order_bp.add_to_cart', book_id=item.id) }}" class="d-inline">
+                <button class="btn btn-sm btn-outline-primary">+</button>
+              </form>
+            </div>
+
+            <!-- Total price per item -->
+            <div class="col-2 text-end">
+              Price: ${{ '%.2f'|format(item.price * item.quantity) }}
+            </div>
+
+            <!-- Remove all button -->
+            <div class="col-2 text-end">
+              <form method="POST" action="{{ url_for('order_bp.remove_book_from_cart', book_id=item.id) }}"
+                    onsubmit="return confirm('Are you sure you want to remove this book?');">
+                <button class="btn btn-sm btn-danger">Remove</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Checkout -->
+    <div class="col-md-4">
+      <div class="card p-3 shadow-sm">
+        <h4 class="mb-3">Checkout</h4>  <!-- <-- header добавлен -->
+        <h5>Total: ${{ '%.2f'|format(total_price) }}</h5>
+        <a href="{{ url_for('order_bp.order') }}" class="btn btn-success w-100 mt-3">Proceed to Order</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <div class="card border-secondary mb-3" style="max-width: 30rem; margin: auto;">
+    <div class="card-header text-center">Welcome, {{ user.username }}</div>
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4">Edit Account Details</h4>
+
+      <!-- Account Details Form -->
+      <form method="POST" action="{{ url_for('user_bp.edit_account') }}">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" readonly class="form-control-plaintext" value="{{ user.username }}">
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-control", value=user.email) }}
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+          {{ form.phone.label(class="form-label") }}
+          {{ form.phone(class="form-control", value=user.phone) }}
+        </div>
+
+        <div class="d-grid mb-4">
+          <button type="submit" class="btn btn-primary fw-semibold">Save Changes</button>
+        </div>
+      </form>
+
+      <hr>
+
+      <!-- Change Password Form -->
+      <h5 class="mb-3">Change Password</h5>
+      <form method="POST" action="{{ url_for('user_bp.change_password') }}">
+        {{ password_form.hidden_tag() }}
+
+        <div class="mb-3">
+          {{ password_form.current_password.label(class="form-label") }}
+          {{ password_form.current_password(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+          {{ password_form.new_password.label(class="form-label") }}
+          {{ password_form.new_password(class="form-control") }}
+        </div>
+
+        <div class="mb-4">
+          {{ password_form.confirm_new_password.label(class="form-label") }}
+          {{ password_form.confirm_new_password(class="form-control") }}
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-secondary fw-semibold">Save Password</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

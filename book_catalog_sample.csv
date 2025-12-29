@@ -1,0 +1,101 @@
+title,author,price,genre,cover_url,description,rating,year
+Book 1,Fyodor Dostoevsky,1480.22,History,https://example.com/book_covers/1.jpg,A fantastic journey through time and space.,3.5,2012
+Book 2,Arthur Conan Doyle,1275.07,History,https://example.com/book_covers/2.jpg,An adventure novel with many twists.,3.8,2003
+Book 3,Yuval Noah Harari,949.68,Business,https://example.com/book_covers/3.jpg,A fantastic journey through time and space.,4.4,2020
+Book 4,Daniel Keyes,781.23,Science,https://example.com/book_covers/4.jpg,A practical guide to skill and mind development.,4.6,2010
+Book 5,Stephen King,1076.35,Science,https://example.com/book_covers/5.jpg,An adventure novel with many twists.,3.8,1966
+Book 6,J.K. Rowling,1361.84,Novel,https://example.com/book_covers/6.jpg,A historical tapestry revealing the fate of nations.,3.7,2004
+Book 7,Herbert Wells,820.56,Science,https://example.com/book_covers/7.jpg,An intriguing detective story with a surprise ending.,3.1,2023
+Book 8,Leo Tolstoy,1379.71,Detective,https://example.com/book_covers/8.jpg,A fantastic journey through time and space.,3.6,1964
+Book 9,Ray Bradbury,304.55,Adventure,https://example.com/book_covers/9.jpg,A deep psychological analysis of personality and society.,3.8,2009
+Book 10,Isaac Asimov,655.24,Business,https://example.com/book_covers/10.jpg,Biography of an outstanding person who changed the world.,3.5,2002
+Book 11,Daniel Keyes,449.34,Biography,https://example.com/book_covers/11.jpg,An adventure novel with many twists.,4.3,1980
+Book 12,Ray Bradbury,835.68,Detective,https://example.com/book_covers/12.jpg,"Story of love, betrayal, and strength of spirit.",3.5,1973
+Book 13,J.K. Rowling,1439.12,Fantasy,https://example.com/book_covers/13.jpg,A dive into the mysteries of science and discoveries.,4.2,2012
+Book 14,Isaac Asimov,1217.18,Business,https://example.com/book_covers/14.jpg,An intriguing detective story with a surprise ending.,3.4,1991
+Book 15,Arthur Conan Doyle,1340.01,Fantasy,https://example.com/book_covers/15.jpg,Biography of an outstanding person who changed the world.,4.3,2000
+Book 16,Leo Tolstoy,1109.04,Fantasy,https://example.com/book_covers/16.jpg,A fantastic journey through time and space.,4.4,1977
+Book 17,J.K. Rowling,410.74,Novel,https://example.com/book_covers/17.jpg,An intriguing detective story with a surprise ending.,3.9,1996
+Book 18,Ray Bradbury,538.33,Business,https://example.com/book_covers/18.jpg,A historical tapestry revealing the fate of nations.,3.5,2012
+Book 19,Daniel Keyes,385.03,Business,https://example.com/book_covers/19.jpg,A gripping novel about human nature and the search for truth.,3.8,2007
+Book 20,Arthur Conan Doyle,1202.45,Science,https://example.com/book_covers/20.jpg,An intriguing detective story with a surprise ending.,4.8,2017
+Book 21,Yuval Noah Harari,618.16,Psychology,https://example.com/book_covers/21.jpg,A historical tapestry revealing the fate of nations.,4.5,1969
+Book 22,Leo Tolstoy,483.73,Business,https://example.com/book_covers/22.jpg,Biography of an outstanding person who changed the world.,3.1,1992
+Book 23,Daniel Keyes,1212.33,Psychology,https://example.com/book_covers/23.jpg,An intriguing detective story with a surprise ending.,4.1,2012
+Book 24,Stephen King,817.5,Science,https://example.com/book_covers/24.jpg,"Story of love, betrayal, and strength of spirit.",4.6,1990
+Book 25,J.K. Rowling,816.78,Biography,https://example.com/book_covers/25.jpg,A deep psychological analysis of personality and society.,3.2,1966
+Book 26,Arthur Conan Doyle,927.22,Adventure,https://example.com/book_covers/26.jpg,A deep psychological analysis of personality and society.,4.4,2014
+Book 27,Isaac Asimov,541.43,Detective,https://example.com/book_covers/27.jpg,A dive into the mysteries of science and discoveries.,4.2,2006
+Book 28,Leo Tolstoy,1331.32,Science,https://example.com/book_covers/28.jpg,A dive into the mysteries of science and discoveries.,4.9,1983
+Book 29,Ray Bradbury,877.25,History,https://example.com/book_covers/29.jpg,A historical tapestry revealing the fate of nations.,3.8,2008
+Book 30,Herbert Wells,1225.53,Business,https://example.com/book_covers/30.jpg,"Story of love, betrayal, and strength of spirit.",4.0,1960
+Book 31,J.K. Rowling,651.26,History,https://example.com/book_covers/31.jpg,A historical tapestry revealing the fate of nations.,4.0,2023
+Book 32,Leo Tolstoy,883.13,History,https://example.com/book_covers/32.jpg,Biography of an outstanding person who changed the world.,3.8,1976
+Book 33,Arthur Conan Doyle,999.9,Biography,https://example.com/book_covers/33.jpg,A historical tapestry revealing the fate of nations.,3.0,1966
+Book 34,Isaac Asimov,1090.33,Fantasy,https://example.com/book_covers/34.jpg,A practical guide to skill and mind development.,4.9,1990
+Book 35,Ray Bradbury,665.02,Biography,https://example.com/book_covers/35.jpg,A practical guide to skill and mind development.,3.7,1992
+Book 36,Leo Tolstoy,924.37,Science,https://example.com/book_covers/36.jpg,A fantastic journey through time and space.,4.1,2021
+Book 37,Yuval Noah Harari,598.25,Fantasy,https://example.com/book_covers/37.jpg,A practical guide to skill and mind development.,3.7,1987
+Book 38,Yuval Noah Harari,1296.02,Business,https://example.com/book_covers/38.jpg,An adventure novel with many twists.,3.9,2008
+Book 39,Isaac Asimov,369.71,Adventure,https://example.com/book_covers/39.jpg,An intriguing detective story with a surprise ending.,4.5,1997
+Book 40,J.K. Rowling,1070.79,Biography,https://example.com/book_covers/40.jpg,A fantastic journey through time and space.,3.1,2010
+Book 41,Herbert Wells,1265.31,Business,https://example.com/book_covers/41.jpg,A gripping novel about human nature and the search for truth.,3.6,2009
+Book 42,Arthur Conan Doyle,1172.68,Business,https://example.com/book_covers/42.jpg,A fantastic journey through time and space.,4.1,2014
+Book 43,Daniel Keyes,1089.01,Biography,https://example.com/book_covers/43.jpg,"Story of love, betrayal, and strength of spirit.",3.8,2006
+Book 44,Stephen King,405.28,Detective,https://example.com/book_covers/44.jpg,An intriguing detective story with a surprise ending.,4.4,1972
+Book 45,Ray Bradbury,980.2,Business,https://example.com/book_covers/45.jpg,Biography of an outstanding person who changed the world.,4.7,1972
+Book 46,Ray Bradbury,489.21,Fantasy,https://example.com/book_covers/46.jpg,An intriguing detective story with a surprise ending.,4.0,1994
+Book 47,J.K. Rowling,945.55,Business,https://example.com/book_covers/47.jpg,A deep psychological analysis of personality and society.,3.5,1969
+Book 48,Yuval Noah Harari,1126.18,Novel,https://example.com/book_covers/48.jpg,"Story of love, betrayal, and strength of spirit.",4.5,1997
+Book 49,Leo Tolstoy,445.32,Business,https://example.com/book_covers/49.jpg,A gripping novel about human nature and the search for truth.,3.7,2022
+Book 50,Herbert Wells,524.34,Detective,https://example.com/book_covers/50.jpg,A historical tapestry revealing the fate of nations.,4.5,2012
+Book 51,Yuval Noah Harari,417.2,History,https://example.com/book_covers/51.jpg,An intriguing detective story with a surprise ending.,4.6,1985
+Book 52,Fyodor Dostoevsky,475.33,Novel,https://example.com/book_covers/52.jpg,A historical tapestry revealing the fate of nations.,3.6,2000
+Book 53,Yuval Noah Harari,1350.79,History,https://example.com/book_covers/53.jpg,An intriguing detective story with a surprise ending.,4.4,1988
+Book 54,J.K. Rowling,656.87,Biography,https://example.com/book_covers/54.jpg,"Story of love, betrayal, and strength of spirit.",3.5,1979
+Book 55,J.K. Rowling,957.4,Psychology,https://example.com/book_covers/55.jpg,A dive into the mysteries of science and discoveries.,4.8,1997
+Book 56,Yuval Noah Harari,1477.7,Detective,https://example.com/book_covers/56.jpg,A historical tapestry revealing the fate of nations.,3.5,1986
+Book 57,Daniel Keyes,1343.96,Fantasy,https://example.com/book_covers/57.jpg,A gripping novel about human nature and the search for truth.,3.7,2020
+Book 58,Stephen King,976.65,Novel,https://example.com/book_covers/58.jpg,A deep psychological analysis of personality and society.,3.6,1989
+Book 59,J.K. Rowling,684.15,Fantasy,https://example.com/book_covers/59.jpg,An intriguing detective story with a surprise ending.,4.2,1982
+Book 60,Herbert Wells,484.73,Fantasy,https://example.com/book_covers/60.jpg,A gripping novel about human nature and the search for truth.,3.7,1994
+Book 61,Fyodor Dostoevsky,1466.96,History,https://example.com/book_covers/61.jpg,A gripping novel about human nature and the search for truth.,4.2,1984
+Book 62,Ray Bradbury,1145.17,Detective,https://example.com/book_covers/62.jpg,A fantastic journey through time and space.,4.9,1968
+Book 63,Ray Bradbury,1313.71,Novel,https://example.com/book_covers/63.jpg,An adventure novel with many twists.,5.0,2020
+Book 64,Ray Bradbury,1000.37,Fantasy,https://example.com/book_covers/64.jpg,A gripping novel about human nature and the search for truth.,3.3,1965
+Book 65,Arthur Conan Doyle,372.77,Business,https://example.com/book_covers/65.jpg,An intriguing detective story with a surprise ending.,4.6,1985
+Book 66,J.K. Rowling,373.65,Science,https://example.com/book_covers/66.jpg,A historical tapestry revealing the fate of nations.,3.6,1988
+Book 67,Arthur Conan Doyle,300.49,Detective,https://example.com/book_covers/67.jpg,An intriguing detective story with a surprise ending.,3.2,2017
+Book 68,Yuval Noah Harari,1236.06,Adventure,https://example.com/book_covers/68.jpg,A practical guide to skill and mind development.,3.1,1984
+Book 69,Isaac Asimov,900.62,History,https://example.com/book_covers/69.jpg,A gripping novel about human nature and the search for truth.,4.7,1975
+Book 70,Ray Bradbury,616.34,Novel,https://example.com/book_covers/70.jpg,An intriguing detective story with a surprise ending.,4.9,1977
+Book 71,Yuval Noah Harari,1427.37,Business,https://example.com/book_covers/71.jpg,A dive into the mysteries of science and discoveries.,4.2,1992
+Book 72,Ray Bradbury,1402.07,Biography,https://example.com/book_covers/72.jpg,A fantastic journey through time and space.,4.9,1976
+Book 73,Arthur Conan Doyle,1368.6,Psychology,https://example.com/book_covers/73.jpg,A deep psychological analysis of personality and society.,3.8,2012
+Book 74,Ray Bradbury,719.33,Science,https://example.com/book_covers/74.jpg,Biography of an outstanding person who changed the world.,3.4,1967
+Book 75,Leo Tolstoy,881.23,Biography,https://example.com/book_covers/75.jpg,An adventure novel with many twists.,4.7,1994
+Book 76,Herbert Wells,740.59,Psychology,https://example.com/book_covers/76.jpg,"Story of love, betrayal, and strength of spirit.",4.0,1975
+Book 77,J.K. Rowling,976.91,Fantasy,https://example.com/book_covers/77.jpg,Biography of an outstanding person who changed the world.,5.0,1971
+Book 78,Arthur Conan Doyle,1239.3,History,https://example.com/book_covers/78.jpg,An adventure novel with many twists.,5.0,2000
+Book 79,Fyodor Dostoevsky,1333.0,Detective,https://example.com/book_covers/79.jpg,A practical guide to skill and mind development.,3.9,1999
+Book 80,J.K. Rowling,703.27,Fantasy,https://example.com/book_covers/80.jpg,A practical guide to skill and mind development.,4.4,2013
+Book 81,Arthur Conan Doyle,1369.68,Biography,https://example.com/book_covers/81.jpg,A practical guide to skill and mind development.,3.0,2020
+Book 82,Fyodor Dostoevsky,642.18,Science,https://example.com/book_covers/82.jpg,Biography of an outstanding person who changed the world.,3.1,1969
+Book 83,Isaac Asimov,1049.38,Biography,https://example.com/book_covers/83.jpg,"Story of love, betrayal, and strength of spirit.",3.9,1989
+Book 84,Stephen King,745.12,Detective,https://example.com/book_covers/84.jpg,A deep psychological analysis of personality and society.,3.7,1982
+Book 85,Arthur Conan Doyle,420.31,Biography,https://example.com/book_covers/85.jpg,"Story of love, betrayal, and strength of spirit.",4.2,1987
+Book 86,Ray Bradbury,526.73,Business,https://example.com/book_covers/86.jpg,An adventure novel with many twists.,4.1,1967
+Book 87,Isaac Asimov,1009.08,Business,https://example.com/book_covers/87.jpg,A practical guide to skill and mind development.,3.3,1967
+Book 88,Fyodor Dostoevsky,1118.28,Psychology,https://example.com/book_covers/88.jpg,A practical guide to skill and mind development.,4.9,1966
+Book 89,Stephen King,802.22,Fantasy,https://example.com/book_covers/89.jpg,A practical guide to skill and mind development.,4.1,1967
+Book 90,Leo Tolstoy,422.62,Biography,https://example.com/book_covers/90.jpg,An intriguing detective story with a surprise ending.,4.8,2007
+Book 91,Stephen King,1314.66,Novel,https://example.com/book_covers/91.jpg,A dive into the mysteries of science and discoveries.,4.3,2023
+Book 92,Daniel Keyes,390.1,Novel,https://example.com/book_covers/92.jpg,A deep psychological analysis of personality and society.,4.2,1986
+Book 93,Leo Tolstoy,707.02,Psychology,https://example.com/book_covers/93.jpg,A historical tapestry revealing the fate of nations.,3.9,2023
+Book 94,Yuval Noah Harari,852.43,Biography,https://example.com/book_covers/94.jpg,A dive into the mysteries of science and discoveries.,3.9,2016
+Book 95,Isaac Asimov,972.47,Business,https://example.com/book_covers/95.jpg,"Story of love, betrayal, and strength of spirit.",3.5,1960
+Book 96,Isaac Asimov,783.18,History,https://example.com/book_covers/96.jpg,A deep psychological analysis of personality and society.,4.6,1961
+Book 97,Ray Bradbury,512.07,Adventure,https://example.com/book_covers/97.jpg,An intriguing detective story with a surprise ending.,4.3,2017
+Book 98,Stephen King,1044.37,Science,https://example.com/book_covers/98.jpg,A gripping novel about human nature and the search for truth.,4.6,1960
+Book 99,Stephen King,491.33,Novel,https://example.com/book_covers/99.jpg,A gripping novel about human nature and the search for truth.,3.8,1968
+Book 100,Fyodor Dostoevsky,439.53,Psychology,https://example.com/book_covers/100.jpg,An intriguing detective story with a surprise ending.,4.8,1983

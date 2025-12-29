@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+
+            <div class="card shadow-lg border-0 rounded-4 mb-5 mt-5">
+                <div class="card-body p-4 p-md-5">
+
+                    <h2 class="text-center mb-4">Account Verification</h2>
+
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+
+                        {% if not message_sent %}
+                            {% if phone_verification %}
+                                <p class="text-muted mb-4 text-center">
+                                    We will send a one-time verification code to your phone number
+                                    <strong>{{ user.phone }}</strong>.
+                                </p>
+                            {% endif %}
+
+                            {% if email_verification %}
+                                <p class="text-muted mb-4 text-center">
+                                    We will send a one-time verification code to your email
+                                    <strong>{{ user.email }}</strong>.
+                                </p>
+                            {% endif %}
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary fw-semibold py-2">
+                                    Send Verification Code
+                                </button>
+                            </div>
+
+                        {% else %}
+                            <p class="text-muted mb-4 text-center">
+                                Enter the verification code
+                            </p>
+
+                            <div class="mb-3">
+                                {{ form.code.label(class="form-label") }}
+                                {{ form.code(class="form-control", placeholder="Enter 6-digit code") }}
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-secondary fw-semibold py-2">
+                                    Confirm
+                                </button>
+                            </div>
+
+                            <p class="text-muted text-center mt-3 small">
+                                Didn’t receive the code? Please wait a minute and try again.
+                            </p>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4 text-center">
+  <h2>🎉 Thank you for your order!</h2>
+  <p>Your order has been placed successfully.</p>
+
+  <h4>Order summary:</h4>
+  <ul class="list-group mb-3">
+    {% for item in cart_items %}
+      <li class="list-group-item d-flex justify-content-between">
+        {{ item.title }} ({{ item.quantity }})
+        <span>${{ '%.2f'|format(item.price * item.quantity) }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+  <h5>Total: ${{ '%.2f'|format(total_price) }}</h5>
+
+  <a href="{{ url_for('books_bp.home') }}" class="btn btn-primary mt-3">Back to Home</a>
+  <a href="{{ url_for('order_bp.order_history') }}" class="btn btn-secondary mt-2">View Order History</a>
+</div>
+
+{% endblock %}

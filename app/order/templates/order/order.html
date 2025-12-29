@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Your Order</h2>
+  <p class="text-muted">Follow the steps to complete your order</p>
+
+  {% if step == 'delivery' %}
+  <form method="POST">
+      {{ delivery_form.hidden_tag() }}
+      <input type="hidden" name="step" value="delivery">
+      {{ delivery_form.method.label(class="form-label") }}
+      {{ delivery_form.method(class="form-select") }}
+      <button type="submit" class="btn btn-primary mt-3">Next</button>
+  </form>
+
+  {% elif step == 'address' %}
+  <form method="POST">
+      {{ address_form.hidden_tag() }}
+      <input type="hidden" name="step" value="address">
+
+      {% if delivery_method == 'store_pickup' %}
+          <div class="mb-3">
+              {{ address_form.store_address.label(class="form-label") }}
+              {{ address_form.store_address(class="form-select") }}
+          </div>
+      {% else %}
+          <div class="mb-3">
+              {{ address_form.street.label(class="form-label") }}
+              {{ address_form.street(class="form-control") }}
+          </div>
+          <div class="mb-3">
+              {{ address_form.house.label(class="form-label") }}
+              {{ address_form.house(class="form-control") }}
+          </div>
+          <div class="mb-3">
+              {{ address_form.apartment.label(class="form-label") }}
+              {{ address_form.apartment(class="form-control") }}
+          </div>
+          <div class="mb-3">
+              {{ address_form.city.label(class="form-label") }}
+              {{ address_form.city(class="form-control") }}
+          </div>
+          <div class="mb-3">
+              {{ address_form.postal_code.label(class="form-label") }}
+              {{ address_form.postal_code(class="form-control") }}
+          </div>
+      {% endif %}
+
+      <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+
+    {% elif step == 'payment' %}
+    <form method="POST">
+        {{ payment_form.hidden_tag() }}
+        <input type="hidden" name="step" value="payment">
+
+        {{ payment_form.payment_method.label(class="form-label") }}
+
+        <div class="d-flex flex-column gap-2">
+            {% for choice in payment_form.payment_method %}
+            <label class="payment-option p-2 border rounded d-flex align-items-center gap-2"
+            style="display: inline-flex; width: 200px; padding: 0.5rem; cursor: pointer;">
+                {{ choice() }}
+                {% if choice.data == 'card' %}
+                    <i class="bi bi-credit-card mb-1" style="font-size:1.5rem;"></i>
+                {% elif choice.data == 'cash' %}
+                    <i class="bi bi-cash-stack mb-1" style="font-size:1.5rem;"></i>
+                {% endif %}
+                {{ choice.label.text }}
+            </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Next</button>
+    </form>
+
+
+    {% elif step == 'summary' %}
+    <h4>Order summary</h4>
+
+    {% for item in cart_items %}
+      <p>{{ item.title }} x{{ item.quantity }} - ${{ '%.2f'|format(item.price*item.quantity) }}</p>
+    {% endfor %}
+
+    <p>Total: ${{ '%.2f'|format(total_price) }}</p>
+    <form method="POST">
+      <input type="hidden" name="step" value="summary">
+      <button type="submit" class="btn btn-success">Confirm & Pay</button>
+    </form>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

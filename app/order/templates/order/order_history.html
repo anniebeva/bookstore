@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>Your Orders</h2>
+    <p class="text-muted">Track your active and completed orders</p>
+
+    <!-- Active Orders -->
+    {% if active_orders %}
+    <div class="active-orders mb-5">
+        <h4>Active Orders</h4>
+        {% for order in active_orders %}
+        <div class="card mb-3 p-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>Order ID:</strong> {{ order['id'] }}<br>
+                    <strong>Date:</strong> {{ order['created_at'] }}<br>
+                    <strong>Status:</strong> {{ order['status'] }}
+                </div>
+                <div>
+                    <strong>Total:</strong> ${{ '%.2f'|format(order['total_price']) }}
+                </div>
+            </div>
+            <hr>
+            <div>
+                {% for item in order['items'] %}
+                <p>
+                    <strong>{{ item['title'] }}</strong> by {{ item['author'] }}<br>
+                    Quantity: {{ item['quantity'] }} - Price per item: ${{ '%.2f'|format(item['price']) }}<br>
+                    <em>Subtotal:</em> ${{ '%.2f'|format(item['total']) }}
+                </p>
+                {% endfor %}
+            </div>
+            <form method="POST">
+                <input type="hidden" name="order_id" value="{{ order['id'] }}">
+                <button type="submit" class="btn btn-success"
+                        onclick="return confirm('Are you sure you received this order?');">
+                    Confirm Receival
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="text-muted">No active orders</p>
+    {% endif %}
+
+    <hr>
+
+    <!-- Completed Orders -->
+    {% if complete_orders %}
+    <div class="complete-orders">
+        <h4>Completed Orders</h4>
+        {% for order in complete_orders %}
+        <div class="card mb-3 p-3 bg-light">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>Order ID:</strong> {{ order['id'] }}<br>
+                    <strong>Date:</strong> {{ order['created_at'] }}<br>
+                    <strong>Status:</strong> {{ order['status'] }}
+                </div>
+                <div>
+                    <strong>Total:</strong> ${{ '%.2f'|format(order['total_price']) }}
+                </div>
+            </div>
+            <hr>
+            <div>
+                {% for item in order['items'] %}
+                <p>
+                    <strong>{{ item['title'] }}</strong> by {{ item['author'] }}<br>
+                    Quantity: {{ item['quantity'] }} - Price per item: ${{ '%.2f'|format(item['price']) }}<br>
+                    <em>Subtotal:</em> ${{ '%.2f'|format(item['total']) }}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="text-muted">No completed orders</p>
+    {% endif %}
+
+</div>
+{% endblock %}

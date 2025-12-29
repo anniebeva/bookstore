@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+
+  {% if query %}
+    <h4>Search results for "{{ query }}"</h4>
+  {% endif %}
+
+  <!-- Categories -->
+  <div class="mb-4">
+    <div class="d-flex gap-2 flex-wrap">
+      <!-- All btn -->
+      <a href="{{ url_for('books_bp.catalog', category='All') }}"
+         class="btn {% if current_category == 'All' %}btn-dark{% else %}btn-outline-dark{% endif %}">
+        All
+      </a>
+
+      <!-- Other categories -->
+      {% for category in categories %}
+        <a href="{{ url_for('books_bp.catalog', category=category) }}"
+           class="btn {% if category == current_category %}btn-dark{% else %}btn-outline-dark{% endif %}">
+          {{ category }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Genres sidebar -->
+    <aside class="col-md-3">
+      <h5 class="mb-3">Genres</h5>
+      <ul class="list-group">
+        <!-- All genres -->
+        <a href="{{ url_for('books_bp.catalog', category=current_category) }}"
+           class="list-group-item list-group-item-action {% if not current_genre %}active{% endif %}">
+          All
+        </a>
+
+        <!-- Genres -->
+        {% for genre in genres %}
+          <a href="{{ url_for('books_bp.catalog', category=current_category, genre=genre) }}"
+             class="list-group-item list-group-item-action {% if genre == current_genre %}active{% endif %}">
+            {{ genre }}
+          </a>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <!-- Books -->
+    <section class="col-md-9">
+      {% if books %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% for book in books %}
+            <div class="col">
+              <div class="card h-100">
+                {% if book.cover %}
+                  <img src="{{ url_for('static', filename=book.cover) }}"
+                       class="card-img-top"
+                       alt="{{ book.title }}">
+                {% endif %}
+
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ book.title }}</h5>
+                  <p class="card-text text-muted mb-1">{{ book.author }}</p>
+                  <p class="small text-muted">⭐ {{ book.rating or '—' }}</p>
+
+                  <a href="{{ url_for('books_bp.book_info', book_id=book.id) }}"
+                     class="btn btn-outline-dark mt-auto">
+                    View
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted">No books found.</p>
+      {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}

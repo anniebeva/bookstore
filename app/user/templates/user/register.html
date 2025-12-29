@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+
+            <div class="card shadow-lg border-0 rounded-4 mb-3 mt-4">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="text-left mb-4">Registration Form</h2>
+
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            {{ form.username.label(class="form-label") }}
+                            {{ form.username(class="form-control") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.phone.label(class="form-label") }}
+                            {{ form.phone(class="form-control") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-control") }}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.confirm_password.label(class="form-label") }}
+                            {{ form.confirm_password(class="form-control") }}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary fw-semibold">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <p class="text-center">
+                Already have an account? <a href="{{ url_for('user_bp.login') }}">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!--4. Регистрация и вход-->
+
+<!--Регистрация с полями: имя, email, телефон, пароль-->
+<!--Подтверждение через код (имитация, без реальной СМС)-->
+<!--Вход по email и паролю-->
