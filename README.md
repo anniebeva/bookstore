@@ -27,9 +27,7 @@ Users can browse books, add them to a cart, place orders, and leave reviews.
 - Jinja2
 - Bootstrap
 
---
-
-
+---
 ## Getting Started
 
 ### Prerequisites
@@ -38,51 +36,64 @@ Users can browse books, add them to a cart, place orders, and leave reviews.
 - PostgreSQL
 - Virtual environment (recommended)
 
----
 
+---
 
 ### Installing
 
 1. Clone the repository:
-
-bash
-git clone https://github.com/your-username/bookstore.git
-cd bookstore
+   
+```
+$ git clone https://github.com/your-username/bookstore.git
+$ cd bookstore
+```
 
 2. Copy code
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-Install dependencies:
 
-3. Copy code
-pip install -r requirements.txt
+```
+$ python -m venv .venv
+$ source .venv/bin/activate  # Windows: .venv\Scripts\activate
+```
 
+4. Install dependencies:
 
-4. Create .env file:
+```
+$ pip install -r requirements.txt
+```
 
+6. Create .env file:
+
+```
 DATABASE_URL=postgresql://user:password@localhost/bookstore_db
 SECRET_KEY=your-secret-key
+```
 
-5. Initialize and fill the database (optional):
+8. Initialize and fill the database (optional):
 
-flask fill_book_db
+```
+$ flask fill_book_db
+```
 
+9. Run the development server:
 
-### Executing program
-flask run
+```
+$ python run.py
+```
 
-The application will be available at:
+11. The application will be available at:
 http://127.0.0.1:5000
 
-## Authors
+
+---
+### Authors
 https://github.com/anniebeva
 
-## Version History
+### Version History
 
 * 0.1
     * Initial Release
 
-##📌 Future improvements
+### 📌 Future improvements
 
 - Unit tests
 - Improve account editting function, add 'forget function'
