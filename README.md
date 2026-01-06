@@ -93,6 +93,13 @@ https://github.com/anniebeva
 * 0.1
     * Initial Release
 
+* 0.2
+    * Project restructuring:
+       * rename directories and blueprints: users -> auth,  books -> products
+       * reorganize folders -> move models, forms, services(from utils) to auth, products, order directories
+       * fix relationships between models and routes
+       * Update book cover styling: img and home page
+
 ### 📌 Future improvements
 
 - Unit tests
