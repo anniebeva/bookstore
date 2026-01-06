@@ -1,9 +1,9 @@
 from flask import Blueprint
 
 user_blueprint = Blueprint(
-    'user_bp',
+    'auth',
     __name__,
     template_folder='templates'
 )
 
-from . import user_routes
+from . import auth_routes

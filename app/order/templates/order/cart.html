@@ -30,12 +30,12 @@
 
             <!-- Quantity controls -->
             <div class="col-2 text-center">
-              <form method="POST" action="{{ url_for('order_bp.remove_copy_from_cart', book_id=item.id) }}" class="d-inline">
+              <form method="POST" action="{{ url_for('order.remove_copy_from_cart', book_id=item.id) }}" class="d-inline">
                 <button class="btn btn-sm btn-outline-secondary">-</button>
               </form>
               <span class="mx-2">{{ item.quantity }}</span>
 
-              <form method="POST" action="{{ url_for('order_bp.add_to_cart', book_id=item.id) }}" class="d-inline">
+              <form method="POST" action="{{ url_for('order.add_to_cart', book_id=item.id) }}" class="d-inline">
                 <button class="btn btn-sm btn-outline-primary">+</button>
               </form>
             </div>
@@ -47,7 +47,7 @@
 
             <!-- Remove all button -->
             <div class="col-2 text-end">
-              <form method="POST" action="{{ url_for('order_bp.remove_book_from_cart', book_id=item.id) }}"
+              <form method="POST" action="{{ url_for('order.remove_book_from_cart', book_id=item.id) }}"
                     onsubmit="return confirm('Are you sure you want to remove this book?');">
                 <button class="btn btn-sm btn-danger">Remove</button>
               </form>
@@ -64,7 +64,7 @@
       <div class="card p-3 shadow-sm">
         <h4 class="mb-3">Checkout</h4>  <!-- <-- header добавлен -->
         <h5>Total: ${{ '%.2f'|format(total_price) }}</h5>
-        <a href="{{ url_for('order_bp.order') }}" class="btn btn-success w-100 mt-3">Proceed to Order</a>
+        <a href="{{ url_for('order.order') }}" class="btn btn-success w-100 mt-3">Proceed to Order</a>
       </div>
     </div>
   </div>

@@ -1,39 +1,12 @@
-from . import order_blueprint
-
 from flask import flash, redirect, render_template, url_for, request
-from flask_login import login_required, current_user
+from flask_login import login_required
 from flask import session as flask_session
 
-from flask_wtf import FlaskForm
-from wtforms import StringField, RadioField, SelectField
-from wtforms.validators import InputRequired
-
 from app.database import session_scope
-from app.utils import get_cart_items, calculate_total_price, add_address, update_cart_quantity, \
+from . import order_blueprint
+from app.order.forms import DeliveryForm, PaymentForm, AddressForm
+from app.order.services import get_cart_items, calculate_total_price, add_address, update_cart_quantity, \
     create_new_order, clear_cart, get_orders, update_order_status
-
-
-class DeliveryForm(FlaskForm):
-    method = SelectField('Delivery Method', choices=[('store_pickup', 'PickUp from store'),
-                                                     ('courier', 'Courier')], validators=[InputRequired()])
-
-class AddressForm(FlaskForm):
-    store_address = SelectField('Store', choices=[...])
-    street = StringField('Street')
-    house = StringField('House')
-    apartment = StringField('Apartment')
-    city = StringField('City')
-    postal_code = StringField('Postal code')
-
-    def validate(self, extra_validators=None):
-        if flask_session.get('delivery_method') == 'store_pickup':
-            return bool(self.store_address.data)
-        else:
-            return all([self.street.data, self.house.data, self.city.data, self.postal_code.data])
-
-class PaymentForm(FlaskForm):
-    payment_method = RadioField('Payment Method', choices=[('card', 'Card'), ('cash', 'Cash')],
-                              validators=[InputRequired()])
 
 
 @order_blueprint.route('/add_to_cart/<int:book_id>', methods=['POST'])
@@ -62,7 +35,7 @@ def remove_book_from_cart(book_id):
 
     update_cart_quantity(book_id, change=-9999)
     flash("Book removed from cart", "warning")
-    return redirect(url_for('order_bp.cart'))
+    return redirect(url_for('order.cart'))
 
 
 @order_blueprint.route('/cart', methods=['GET', 'POST'])
@@ -112,15 +85,13 @@ def order():
             step = 'summary'
 
         elif step == 'summary':
-            order = create_new_order(cart_items)
-
             flask_session['cart_items'] = cart_items
             flask_session['total_price'] = total_price
 
             if flask_session.get('payment_method') == 'card':
-                return redirect(url_for('order_bp.payment_redirect'))
+                return redirect(url_for('order.payment_redirect'))
 
-            return redirect(url_for('order_bp.order_success'))
+            return redirect(url_for('order.order_success'))
 
     flask_session['cart_items'] = cart_items
     flask_session['total_price'] = total_price
@@ -146,7 +117,7 @@ def payment_redirect():
     payment_method = flask_session.get('payment_method', 'card')
 
     if request.method == 'POST':
-        return redirect(url_for('order_bp.order_success'))
+        return redirect(url_for('order.order_success'))
 
     return render_template('order/payment_redirect.html', payment_method=payment_method)
 
@@ -163,7 +134,7 @@ def order_success():
 
     if not cart_items:
         flash('No order found', 'warning')
-        return redirect(url_for('order_bp.cart'))
+        return redirect(url_for('order.cart'))
 
     order = create_new_order(cart_items)
 
@@ -186,26 +157,25 @@ def order_success():
 @login_required
 def order_history():
     """Order history page: shows all past orders, sorts them by active and complete"""
-
     with session_scope() as db_session:
         active_orders = get_orders(db_session, status='active')
         complete_orders = get_orders(db_session, status='complete')
 
         if request.method == 'POST':
             order_id = request.form.get('order_id')
+
             if order_id:
-                update_order_status(db_session, order_id)
+                update_order_status(db_session, order_id, 'complete')
                 active_orders = get_orders(db_session, status='active')
                 complete_orders = get_orders(db_session, status='complete')
-
                 flash('Enjoy your order! Don\'t forget to share your reviews', 'success')
 
                 return render_template('order/order_history.html',
-                    active_orders=active_orders,
-                    complete_orders=complete_orders)
+                                       active_orders=active_orders,
+                                       complete_orders=complete_orders)
 
     return render_template('order/order_history.html',
-                    active_orders=active_orders,
-                    complete_orders=complete_orders)
+                           active_orders=active_orders,
+                           complete_orders=complete_orders)
 
 

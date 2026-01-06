@@ -1,6 +1,6 @@
 import csv
 from app.database import session_scope
-from app.models import Book, Genre, Stock
+from app.products.models import Book, Genre, Stock
 import random
 
 DEFAULT_QTY = 3
@@ -50,4 +50,4 @@ with session_scope() as session:
             )
             session.add(stock)
 
-    print('books added')
+    print('products added')

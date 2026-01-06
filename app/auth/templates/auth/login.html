@@ -8,51 +8,37 @@
 
             <div class="card shadow-lg border-0 rounded-4 mb-3 mt-4">
                 <div class="card-body p-4 p-md-5">
-                    <h2 class="text-left mb-4">Registration Form</h2>
+                    <h2 class="text-left mb-4">Login</h2>
 
                     <form method="POST">
                         {{ form.hidden_tag() }}
-
-                        <div class="mb-3">
-                            {{ form.username.label(class="form-label") }}
-                            {{ form.username(class="form-control") }}
-                        </div>
 
                         <div class="mb-3">
                             {{ form.email.label(class="form-label") }}
                             {{ form.email(class="form-control") }}
                         </div>
 
-                        <div class="mb-3">
-                            {{ form.phone.label(class="form-label") }}
-                            {{ form.phone(class="form-control") }}
-                        </div>
 
                         <div class="mb-3">
                             {{ form.password.label(class="form-label") }}
                             {{ form.password(class="form-control") }}
                         </div>
 
-                        <div class="mb-4">
-                            {{ form.confirm_password.label(class="form-label") }}
-                            {{ form.confirm_password(class="form-control") }}
-                        </div>
-
-                        <div class="d-grid">
+                        <div class="d-grid mt-5">
                             <button type="submit" class="btn btn-primary fw-semibold">
-                                Register
+                                Login
                             </button>
                         </div>
                     </form>
 
                 </div>
             </div>
-            <p class="text-center">
-                Already have an account? <a href="{{ url_for('user_bp.login') }}">Login</a>
-            </p>
+            <p class="text-center">Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a></p>
+
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 <!--4. Регистрация и вход-->

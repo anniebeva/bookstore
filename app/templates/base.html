@@ -19,10 +19,10 @@
               <div class="d-flex align-items-center">
                   <h1 class="navbar-brand mb-0 me-3">My Bookstore</h1>
                   <a class="nav-link me-2" href="/">Home</a>
-                  <a class="nav-link" href="{{ url_for('books_bp.catalog') }}">Catalogue</a>
+                  <a class="nav-link" href="{{ url_for('products.catalog') }}">Catalogue</a>
               </div>
 
-              <form class="d-flex mx-auto" method="GET" action="{{ url_for('books_bp.search') }}" style="max-width: 600px; width: 100%;">
+              <form class="d-flex mx-auto" method="GET" action="{{ url_for('products.search') }}" style="max-width: 600px; width: 100%;">
                   <input class="form-control me-2 flex-grow-1" type="search"
                        name="q" placeholder="Search by title or author..." aria-label="Search">
                   <button class="btn btn-secondary" type="submit">Search</button>
@@ -33,15 +33,15 @@
                     <a class="nav-link" href="/order_history">
                         <i class="bi bi-clock-history fs-5"></i>
                     </a>
-                    <a class="nav-link" href="{{ url_for('user_bp.account') }}">
+                    <a class="nav-link" href="{{ url_for('auth.account') }}">
                         <i class="bi bi-person-circle fs-4"></i>
                     </a>
                   {% else %}
-                    <a class="nav-link" href="{{ url_for('user_bp.login') }}">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">
                         <i class="bi bi-person-circle fs-4"></i>
                     </a>
                   {% endif %}
-                    <a class="nav-link" href="{{ url_for('order_bp.cart') }}">
+                    <a class="nav-link" href="{{ url_for('order.cart') }}">
                         <i class="bi bi-cart fs-3"></i>
                     </a>
               </div>

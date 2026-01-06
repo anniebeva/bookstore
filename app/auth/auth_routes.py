@@ -1,39 +1,13 @@
-
-from flask import Blueprint, flash, redirect, render_template, url_for, request
+from flask import flash, redirect, render_template, url_for, request
 from flask_login import current_user, login_required, login_user, logout_user
 
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
-
 from app.database import session_scope
-from app.models import User
+from app.auth.models import User
+from app.auth.forms import RegistrationForm, VerificationForm, ChangePasswordForm, EditForm, LoginForm
+
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import user_blueprint
-
-class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[InputRequired(), Email()])
-    password = PasswordField('Password', validators=[InputRequired(), Length(8, 36)])
-
-class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(), Length(4,100)])
-    email = StringField('Email', validators=[InputRequired(), Email()])
-    phone = StringField('Phone', validators=[InputRequired(), Length(11, 20)])
-    password = PasswordField('Password', validators=[InputRequired(), Length(8, 36)])
-    confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo("password")])
-
-class VerificationForm(FlaskForm):
-    code = StringField('Verification Code', validators=[InputRequired(), Length(4)])
-
-class EditForm(FlaskForm):
-    email = StringField('Email', validators=[InputRequired(), Email()])
-    phone = StringField('Phone', validators=[InputRequired(), Length(11, 20)])
-
-class ChangePasswordForm(FlaskForm):
-    current_password = PasswordField('Password', validators=[InputRequired(), Length(8, 36)])
-    new_password = PasswordField('Password', validators=[InputRequired(), Length(8, 36)])
-    confirm_new_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo("password")])
 
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
@@ -46,7 +20,7 @@ def register():
             user = session.query(User).filter_by(email=form.email.data).first()
         if user:
             flash('User with this email already exists!', category='danger')
-            return  render_template('user/register.html', form=form)
+            return  render_template('auth/register.html', form=form)
 
         user = User(username=form.username.data,
                     email=form.email.data,
@@ -57,12 +31,12 @@ def register():
             session.add(user)
 
         flash('Registration successful! Please verify your phone.', 'success')
-        return redirect(url_for('user_bp.verify_phone'))
+        return redirect(url_for('auth.verify_phone'))
 
     elif form.errors:
         flash(form.errors, category='danger')
 
-    return render_template('user/register.html',
+    return render_template('auth/register.html',
                            form=form)
 
 
@@ -80,9 +54,9 @@ def verify_phone():
             flash('Verification code has been sent to your phone.', 'info')
         else:
             flash('Your phone number has been successfully verified.', 'success')
-            return redirect(url_for('user_bp.login'))
+            return redirect(url_for('auth.login'))
 
-    return render_template('user/verification.html',
+    return render_template('auth/verification.html',
                            user=current_user,
                            message_sent=message_sent,
                            form=form,
@@ -102,9 +76,9 @@ def verify_email():
             flash('Verification code has been sent to your email.', 'info')
         else:
             flash('Your email has been successfully verified.', 'success')
-            return redirect(url_for('user_bp.account'))
+            return redirect(url_for('auth.account'))
 
-    return render_template('user/verification.html',
+    return render_template('auth/verification.html',
                            user=current_user,
                            message_sent=message_sent,
                            form=form,
@@ -121,38 +95,38 @@ def login():
             user = session.query(User).filter_by(email=form.email.data).first()
             if not user:
                 flash('No account found with this email. Please register first.','warning')
-                return redirect(url_for('user_bp.register'))
+                return redirect(url_for('auth.register'))
 
             if not check_password_hash(user.password_hash, form.password.data):
                 flash('Incorrect password. Please try again.','danger')
-                return render_template('user/login.html', form=form)
+                return render_template('auth/login.html', form=form)
 
             login_user(user)
             flash('You are successfully logged in!', 'success')
-            return redirect(url_for('books_bp.home'))
+            return redirect(url_for('products.home'))
 
-    return render_template('user/login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 
 @user_blueprint.route('/logout')
 def logout():
     """Log out from account"""
     logout_user()
-    return redirect(url_for('user_bp.login'))
+    return redirect(url_for('auth.login'))
 
 @user_blueprint.route('/account')
 @login_required
 def account():
-    """Account page: shows user information"""
+    """Account page: shows auth information"""
     user = current_user
-    return render_template('user/account.html',
+    return render_template('auth/account.html',
                            user=user)
 
 
 @user_blueprint.route('/account/edit', methods=['GET', 'POST'])
 @login_required
 def edit_account():
-    """Edit account page: allows user to edit email and phone number"""
+    """Edit account page: allows auth to edit email and phone number"""
     form = EditForm()
     password_form = ChangePasswordForm()
     user = current_user
@@ -165,9 +139,9 @@ def edit_account():
             session.add(user)
 
         flash('Update successful!', 'success')
-        return redirect(url_for('user_bp.account'))
+        return redirect(url_for('auth.account'))
 
-    return render_template('user/edit_account.html',
+    return render_template('auth/edit_account.html',
                            user=user,
                            form=form,
                            password_form=password_form)
@@ -176,7 +150,7 @@ def edit_account():
 @user_blueprint.route('/account/change_password', methods=['GET', 'POST'])
 @login_required
 def change_password():
-    """Change password page: allows user to edit password"""
+    """Change password page: allows auth to edit password"""
     password_form = ChangePasswordForm()
     user = current_user
 
@@ -194,8 +168,8 @@ def change_password():
             with session_scope() as session:
                 session.add(user)
             flash('Password successfully changed!', 'success')
-            return redirect(url_for('user_bp.verify_phone',
-                                    next=url_for('user_bp.account')))
+            return redirect(url_for('auth.verify_phone',
+                                    next=url_for('auth.account')))
 
-    return render_template('user/edit_account.html', user=user,
+    return render_template('auth/edit_account.html', user=user,
                            password_form=password_form, change_password=True)

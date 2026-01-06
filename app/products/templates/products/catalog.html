@@ -11,14 +11,14 @@
   <div class="mb-4">
     <div class="d-flex gap-2 flex-wrap">
       <!-- All btn -->
-      <a href="{{ url_for('books_bp.catalog', category='All') }}"
+      <a href="{{ url_for('products.catalog', category='All') }}"
          class="btn {% if current_category == 'All' %}btn-dark{% else %}btn-outline-dark{% endif %}">
         All
       </a>
 
       <!-- Other categories -->
       {% for category in categories %}
-        <a href="{{ url_for('books_bp.catalog', category=category) }}"
+        <a href="{{ url_for('products.catalog', category=category) }}"
            class="btn {% if category == current_category %}btn-dark{% else %}btn-outline-dark{% endif %}">
           {{ category }}
         </a>
@@ -32,14 +32,14 @@
       <h5 class="mb-3">Genres</h5>
       <ul class="list-group">
         <!-- All genres -->
-        <a href="{{ url_for('books_bp.catalog', category=current_category) }}"
+        <a href="{{ url_for('products.catalog', category=current_category) }}"
            class="list-group-item list-group-item-action {% if not current_genre %}active{% endif %}">
           All
         </a>
 
         <!-- Genres -->
         {% for genre in genres %}
-          <a href="{{ url_for('books_bp.catalog', category=current_category, genre=genre) }}"
+          <a href="{{ url_for('products.catalog', category=current_category, genre=genre) }}"
              class="list-group-item list-group-item-action {% if genre == current_genre %}active{% endif %}">
             {{ genre }}
           </a>
@@ -65,7 +65,7 @@
                   <p class="card-text text-muted mb-1">{{ book.author }}</p>
                   <p class="small text-muted">⭐ {{ book.rating or '—' }}</p>
 
-                  <a href="{{ url_for('books_bp.book_info', book_id=book.id) }}"
+                  <a href="{{ url_for('products.book_info', book_id=book.id) }}"
                      class="btn btn-outline-dark mt-auto">
                     View
                   </a>

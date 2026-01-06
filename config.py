@@ -21,4 +21,25 @@ BOOK_CATEGORIES = {
 }
 
 
+PICKUP_STORES = [
+('', 'Select pickup location'),
+
+    (
+        'Downtown Books|Main Street 12|Springfield',
+        'Downtown Books — Main Street 12, Springfield'
+    ),
+    (
+        'Readers Corner|Oak Avenue 7|Riverdale',
+        'Readers Corner — Oak Avenue 7, Riverdale'
+    ),
+    (
+        'Book Haven|Maple Road 45|Hill Valley',
+        'Book Haven — Maple Road 45, Hill Valley'
+    ),
+    (
+        'City Library Pickup|Broadway 101|Fairview',
+        'City Library Pickup — Broadway 101, Fairview'
+    ),
+]
+
 settings = Settings()

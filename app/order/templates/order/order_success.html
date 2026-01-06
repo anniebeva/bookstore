@@ -17,8 +17,8 @@
   </ul>
   <h5>Total: ${{ '%.2f'|format(total_price) }}</h5>
 
-  <a href="{{ url_for('books_bp.home') }}" class="btn btn-primary mt-3">Back to Home</a>
-  <a href="{{ url_for('order_bp.order_history') }}" class="btn btn-secondary mt-2">View Order History</a>
+  <a href="{{ url_for('products.home') }}" class="btn btn-primary mt-3">Back to Home</a>
+  <a href="{{ url_for('order.order_history') }}" class="btn btn-secondary mt-2">View Order History</a>
 </div>
 
 {% endblock %}

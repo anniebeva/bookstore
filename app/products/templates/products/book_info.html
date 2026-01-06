@@ -42,7 +42,7 @@
             <div class="card-body text-center">
                 <h4 class="mb-3">${{ '%.2f'|format(book.price) }}</h4>
 
-                <form method="POST" action="{{ url_for('order_bp.add_to_cart', book_id=book.id) }}">
+                <form method="POST" action="{{ url_for('order.add_to_cart', book_id=book.id) }}">
                     {% if qty_in_cart > 0 %}
                         <p class="text-muted">
                             In cart: {{ qty_in_cart }}
@@ -63,7 +63,7 @@
 
                 {% if in_cart %}
                 <form method="POST"
-                      action="{{ url_for('order_bp.remove_book_from_cart', book_id=book.id) }}"
+                      action="{{ url_for('order.remove_book_from_cart', book_id=book.id) }}"
                       class="mt-1">
                     <button type="submit" class="btn btn-danger w-100">
                         <i class="bi bi-trash me-1"></i>
@@ -77,7 +77,7 @@
                 {% endif %}
                 
                 {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('books_bp.share_review', book_id=book.id) }}" class="btn btn-outline-secondary text-bold mt-3">
+                    <a href="{{ url_for('products.share_review', book_id=book.id) }}" class="btn btn-outline-secondary text-bold mt-3">
                         Leave review
                     </a>
                 {% endif %}
