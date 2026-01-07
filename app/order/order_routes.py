@@ -6,7 +6,7 @@ from app.database import session_scope
 from . import order_blueprint
 from app.order.forms import DeliveryForm, PaymentForm, AddressForm
 from app.order.services import get_cart_items, calculate_total_price, add_address, update_cart_quantity, \
-    create_new_order, clear_cart, get_orders, update_order_status
+    create_new_order, clear_cart, get_orders, update_order_status, finalize_order
 
 
 @order_blueprint.route('/add_to_cart/<int:book_id>', methods=['POST'])
@@ -127,8 +127,9 @@ def payment_redirect():
 def order_success():
     """
     Sucess page: confirms that order was submitted sucessfully
-    Function creates new order, decreases  stock, and cleans up cart session and table
+    Function finalizes order: creates new order, decreases  stock, and cleans up cart session and table
     """
+
     cart_items = flask_session.get('cart_items', [])
     total_price = flask_session.get('total_price', 0)
 
@@ -136,9 +137,11 @@ def order_success():
         flash('No order found', 'warning')
         return redirect(url_for('order.cart'))
 
-    order = create_new_order(cart_items)
+    order = finalize_order(cart_items)
 
-    clear_cart()
+    if not order:
+        flash('Order could not be created', 'danger')
+        return redirect(url_for('order.cart'))
 
     flask_session.pop('cart_items', None)
     flask_session.pop('total_price', None)
@@ -152,6 +155,7 @@ def order_success():
         total_price=total_price,
         order=order
     )
+
 
 @order_blueprint.route('/order_history', methods=['GET', 'POST'])
 @login_required

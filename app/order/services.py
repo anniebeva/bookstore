@@ -238,10 +238,10 @@ def get_cart_items_session(db_session) -> list[dict]:
     return items
 
 def clear_cart():
-    """Remove all the items from cart table in db and flask session"""
+    """Remove all the ordered items from cart table in db and flask session"""
     if current_user.is_authenticated:
-        with session_scope() as session:
-            session.query(CartItem).filter(
+        with session_scope() as db_session:
+            db_session.query(CartItem).filter(
                 CartItem.user_id == current_user.id
             ).delete()
     else:
@@ -279,6 +279,19 @@ def create_new_order(cart_items):
 
     return order
 
+def finalize_order(cart_items):
+    """
+    Creates order, decreases stock, clears cart table.
+    Returns created order or None.
+    """
+    if not cart_items:
+        return None
+
+    order = create_new_order(cart_items)
+    clear_cart()
+
+    return order
+
 
 def get_orders(db_session, status: str | None = None) -> list[dict]:
     """
@@ -301,20 +314,27 @@ def get_orders(db_session, status: str | None = None) -> list[dict]:
     return [order_to_dict(order) for order in orders]
 
 def update_order_status(db_session, order_id: int, new_status: str):
-    """Update order status: pending -> active, active -> complete"""
+    """
+    Update order status:
+    Currently active -> complete, for future use (pending, cancelled)
+    """
 
     order = db_session.query(Order).filter_by(id=order_id, user_id=current_user.id).first()
     order.status = new_status
     db_session.commit()
 
+
 def delete_order(db_session, order_id):
-    """Delete pending order"""
+    """Delete pending order - not used atm"""
     order = db_session.query(Order).filter_by(id=order_id, user_id=current_user.id).first()
     db_session.delete(order)
     db_session.commit()
 
 
 def book_to_dict(book) -> dict:
+    """
+    Converts book to dictionary. Copied from book services, used for top 3
+    """
     return {
         'id': book.id,
         'title': book.title,
@@ -360,7 +380,6 @@ def get_top_books() -> list[dict]:
         )
 
         return [book_to_dict(b) for b in top_books_raw]
-
 
 
 def check_stock(db_session, book_id:int) -> int:
