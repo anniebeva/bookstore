@@ -9,76 +9,13 @@ from app.database import session_scope
 
 from app.order.models import Order, OrderItem, CartItem
 from app.products.models import Book, Stock
+from app.common.services import book_to_dict, cart_item_to_dict, order_to_dict
 
 from datetime import datetime
 
 """
 Python file for order and cart supporting functions
 """
-
-def cart_item_to_dict(item, quantity=None) -> dict:
-    """
-    Convert cart query into a dict for UI
-    :param item: CartItem (auth) или Book (guest)
-    :param quantity: book quantity
-    """
-    book = item.book if hasattr(item, 'book') else item
-    q = item.quantity if hasattr(item, 'quantity') else quantity
-
-    return {
-        'id': book.id,
-        'title': book.title,
-        'author': book.author,
-        'price': book.price,
-        'cover': book.cover,
-        'quantity': q,
-        'total': book.price * q
-    }
-
-def order_item_to_dict(item) -> dict:
-    """Convert OrderItem query into dict for UI"""
-
-    return {
-        'id': item.book.id,
-        'title': item.book.title,
-        'author': item.book.author,
-        'price': item.book.price,
-        'cover': item.book.cover,
-        'quantity': item.quantity,
-        'total': item.book.price * item.quantity
-    }
-
-def order_to_dict(order) -> dict:
-    """Convert Order query into dict for UI"""
-
-    return {
-        'id': order.id,
-        'created_at': order.date,
-        'status': order.status,
-        'total_price': sum(
-            item.quantity * item.book.price for item in order.items
-        ),
-        'items': [order_item_to_dict(item) for item in order.items]
-    }
-
-
-
-def get_cart_quantity_guest(book_id: int) -> int:
-    """Check if book is already in cart for unauthorized users"""
-    cart = flask_session.get('cart', {})
-    return cart.get(str(book_id), 0)
-
-
-def get_cart_quantity_auth(db_session, book_id: int) -> int:
-    """Check if book is already in cart for authorized users"""
-
-    cart_item = (
-        db_session.query(CartItem)
-        .filter_by(user_id=current_user.id, book_id=book_id)
-        .first()
-    )
-    return cart_item.quantity if cart_item else 0
-
 
 def update_cart_guest(book_id: int, stock: int, change: int) -> bool:
     """Update cart for unathorized users"""
@@ -199,8 +136,6 @@ def add_address(address_form):
                           f"{address_form.postal_code.data}")
 
 
-
-
 def get_cart_items_auth(db_session) -> list[dict]:
     """
     Get cart items for authorized users
@@ -313,7 +248,7 @@ def get_orders(db_session, status: str | None = None) -> list[dict]:
     orders = query.all()
     return [order_to_dict(order) for order in orders]
 
-def update_order_status(db_session, order_id: int, new_status: str):
+def update_order_status(db_session, order_id: int|str, new_status: str):
     """
     Update order status:
     Currently active -> complete, for future use (pending, cancelled)
@@ -331,21 +266,6 @@ def delete_order(db_session, order_id):
     db_session.commit()
 
 
-def book_to_dict(book) -> dict:
-    """
-    Converts book to dictionary. Copied from book services, used for top 3
-    """
-    return {
-        'id': book.id,
-        'title': book.title,
-        'author': book.author,
-        'price': book.price,
-        'cover': book.cover,
-        'rating': book.rating,
-        'year': book.year,
-        'description': book.description,
-        'genres': [g.name for g in book.genres]
-    }
 
 def get_top_books() -> list[dict]:
     """

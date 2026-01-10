@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template, url_for, request
+from flask import flash, redirect, render_template, url_for, request, Blueprint
 from flask_login import current_user, login_required, login_user, logout_user
 
 from app.database import session_scope
@@ -7,7 +7,11 @@ from app.auth.forms import RegistrationForm, VerificationForm, ChangePasswordFor
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from . import user_blueprint
+user_blueprint = Blueprint(
+    'auth',
+    __name__,
+    template_folder='templates'
+)
 
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])

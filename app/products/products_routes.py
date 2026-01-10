@@ -4,13 +4,21 @@ from flask_login import current_user, login_required
 from config import BOOK_CATEGORIES
 
 from app.database import session_scope
-from . import products_blueprint
 from app.products.forms import ReviewForm
 
-from app.products.services import book_to_dict, search_books, \
+from app.products.services import search_books, \
     filter_books_by_category, filter_books_by_genre, get_book, \
-    check_stock, get_reviews, check_existing_review, add_review_score, format_top_books
+    check_stock, get_reviews, check_existing_review, add_review_score
+from app.common.services import book_to_dict, get_cart_quantity_guest, \
+    get_cart_quantity_auth
 
+from flask import Blueprint
+
+products_blueprint = Blueprint(
+    'products',
+    __name__,
+    template_folder='templates'
+)
 
 @products_blueprint.route('/')
 @products_blueprint.route('/home')
@@ -93,7 +101,6 @@ def book_info(book_id:int):
         else:
             available = True
 
-        from app.order.services import get_cart_quantity_guest, get_cart_quantity_auth
         if current_user.is_authenticated:
             qty_in_cart = get_cart_quantity_auth(db_session, book_id)
         else:

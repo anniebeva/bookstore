@@ -1,13 +1,18 @@
-from flask import flash, redirect, render_template, url_for, request
+from flask import flash, redirect, render_template, url_for, request, Blueprint
 from flask_login import login_required
 from flask import session as flask_session
 
 from app.database import session_scope
-from . import order_blueprint
 from app.order.forms import DeliveryForm, PaymentForm, AddressForm
 from app.order.services import get_cart_items, calculate_total_price, add_address, update_cart_quantity, \
-    create_new_order, clear_cart, get_orders, update_order_status, finalize_order
+    get_orders, update_order_status, finalize_order
 
+
+order_blueprint = Blueprint(
+    'order',
+    __name__,
+    template_folder='templates'
+)
 
 @order_blueprint.route('/add_to_cart/<int:book_id>', methods=['POST'])
 def add_to_cart(book_id):

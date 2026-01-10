@@ -19,7 +19,7 @@ app.register_blueprint(products_blueprint)
 
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'user_bp.login'
+login_manager.login_view = 'auth.login'
 login_manager.login_message_category = 'warning'
 
 @login_manager.user_loader
@@ -30,4 +30,6 @@ def load_user(user_id):
             session.expunge(user)
 
         return user
+
+
 

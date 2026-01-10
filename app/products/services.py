@@ -1,47 +1,17 @@
 from flask_login import current_user
 
-from sqlalchemy import desc, func
 from sqlalchemy.orm import joinedload
 
 from app.database import session_scope
 
 from app.products.models import Book, Review, Genre, Stock
+from app.common.services import book_to_dict, review_to_dict
 from config import BOOK_CATEGORIES
 
 """
 Python file for product(products) supporting functions
 """
 
-
-def book_to_dict(book) -> dict:
-    """Convert book query into a dict for UI"""
-
-    return {
-        'id': book.id,
-        'title': book.title,
-        'author': book.author,
-        'price': book.price,
-        'cover': book.cover,
-        'rating': book.rating,
-        'year': book.year,
-        'description': book.description,
-
-        'genres': [g.name for g in book.genres]
-    }
-
-
-def review_to_dict(item):
-    """Convert Review query into dict for UI"""
-
-    return {
-        'id': item.id,
-        'book_id': item.book_id,
-        'user_id': item.user_id,
-        'username': item.user.username if hasattr(item, 'auth') else 'Anonymous',
-        'score': item.score,
-        'review': item.review,
-        'created_at': item.created_at
-    }
 
 def format_top_books(raw_books):
     """Convert top products to dict"""
