@@ -28,7 +28,7 @@ Users can browse books, add them to a cart, place orders, and leave reviews.
 - Bootstrap
 
 ---
-## Getting Started
+## ⚙️ Getting Started
 
 ### Prerequisites
 
@@ -74,7 +74,7 @@ SECRET_KEY=your-secret-key
 $ flask fill_book_db
 ```
 
-9. Run the development server:
+9. ▶️ Run the development server:
 
 ```
 $ python run.py
@@ -100,7 +100,7 @@ https://github.com/anniebeva
        * fix relationships between models and routes
        * Update book cover styling: img and home page
 
-### 📌 Future improvements
+## 📌 Future improvements
 
 - Unit tests
 - Improve account editting function, add 'forget function'
